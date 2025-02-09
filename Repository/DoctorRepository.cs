@@ -51,6 +51,12 @@ namespace MediPlus.Repository
 			throw new NotImplementedException();
 		}
 
+		public async Task<IEnumerable<Doctor>> GetDoctorsByDeptAsync(int departmentId)
+		{
+			var doctors = await _context.Doctors.Where(d => d.DepartmentId == departmentId).ToListAsync();
+			return doctors;
+		}
+
 		public Task<IEnumerable<DoctorTimetable>> GetDoctorTimetablesAsync(int doctorId)
 		{
 			throw new NotImplementedException();

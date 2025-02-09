@@ -11,6 +11,9 @@ namespace MediPlus.Data
 
         [Required]
         public string Content { get; set; }
+        
+        [Required]
+        public string Overview { get; set; }
 
         [Required, StringLength(100)]
         public string Author { get; set; }

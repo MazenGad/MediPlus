@@ -7,6 +7,7 @@ namespace MediPlus.Repository
     public interface IDoctorRepository
     {
 		Task<IEnumerable<Doctor>> GetAllDoctorsAsync();
+		Task<IEnumerable<Doctor>> GetDoctorsByDeptAsync(int departmentId);
 		Task<Doctor> GetDoctorByIdAsync(int id);
 		Task AddDoctorAsync(Doctor doctor);
 		Task UpdateDoctorAsync(Doctor doctor);

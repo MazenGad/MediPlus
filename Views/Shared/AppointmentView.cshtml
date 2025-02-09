@@ -4,16 +4,6 @@
 <section class="appointment">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-12">
-				<div class="section-title">
-					<h2>We Are Always Ready to Help You. Book An Appointment</h2>
-					<img src="img/section-img.png" alt="#">
-					<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-6 col-md-12 col-12">
 				<form class="form" id="appointmentForm" novalidate>
 					<div class="row">
 
@@ -29,26 +19,26 @@
 
 						<div class="col-lg-6 col-md-6 col-12">
 							<div class="form-group">
-									<input asp-for="Appointment.Email" class=" form-control" placeholder="Email" />
-									<span asp-validation-for="Appointment.Email" class="text-danger"></span>
-								</div>
+								<input asp-for="Appointment.Email" class=" form-control" placeholder="Email" />
+								<span asp-validation-for="Appointment.Email" class="text-danger"></span>
+							</div>
 						</div>
 
 						<div class="col-lg-6 col-md-6 col-12">
 							<div class="form-group">
-									<input asp-for="Appointment.PhoneNumber" class="form-control" placeholder="PhoneNumber" />
-									<span asp-validation-for="Appointment.PhoneNumber" class="text-danger"></span>
-								</div>
+								<input asp-for="Appointment.PhoneNumber" class="form-control" placeholder="PhoneNumber" />
+								<span asp-validation-for="Appointment.PhoneNumber" class="text-danger"></span>
+							</div>
 						</div>
 
-							<div class="col-lg-6 col-md-6 col-12">
-								<div class="form-group">
-									<select id="deptId" asp-for="Appointment.DepartmentId" class="form-control" onchange="GetDoctors()" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))">
-										<option value="">Choose Department</option>
-									</select>
-									<span asp-validation-for="Appointment.DepartmentId" class="text-danger"></span>
-								</div>
+						<div class="col-lg-6 col-md-6 col-12">
+							<div class="form-group">
+								<select id="deptId" asp-for="Appointment.DepartmentId" class="form-control" onchange="GetDoctors()" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))">
+									<option value="">Choose Department</option>
+								</select>
+								<span asp-validation-for="Appointment.DepartmentId" class="text-danger"></span>
 							</div>
+						</div>
 
 						<!-- Doctor Dropdown -->
 						<div class="col-lg-6 col-md-6 col-12">
@@ -62,7 +52,7 @@
 
 						<div class="col-lg-6 col-md-6 col-12">
 							<div class="form-group">
-								<input asp-for="Appointment.AppointmentDate" type="date"  class="form-control" placeholder="AppointmentDate" />
+								<input asp-for="Appointment.AppointmentDate" type="date" class="form-control" placeholder="AppointmentDate" />
 								<span asp-validation-for="Appointment.AppointmentDate" class="text-danger"></span>
 							</div>
 						</div>
@@ -81,7 +71,7 @@
 							</div>
 						</div>
 
-						</div>
+					</div>
 					<div class="row">
 						<div class="col-lg-5 col-md-4 col-12">
 							<div class="form-group">
@@ -99,11 +89,7 @@
 
 				</form>
 			</div>
-			<div class="col-lg-6 col-md-12 ">
-				<div class="appointment-image">
-					<img src="img/contact-img.png" alt="#">
-				</div>
-			</div>
+		
 		</div>
 	</div>
 </section>

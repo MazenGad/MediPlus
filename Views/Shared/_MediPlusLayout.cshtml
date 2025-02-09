@@ -69,7 +69,7 @@
 						<ul class="top-link">
 							<li><a href="#">About</a></li>
 							<li><a asp-action="Index" asp-controller="Doctor">Doctors</a></li>
-							<li><a href="#">Contact</a></li>
+							<li><a asp-action="ContactUs" asp-controller="Contact">Contact</a></li>
 							<li><a href="#">FAQ</a></li>
 						</ul>
 						<!-- End Contact -->
@@ -136,7 +136,7 @@
 						</div>
 						<div class="col-lg-2 col-12">
 							<div class="get-quote">
-								<a href="appointment.html" class="btn">Book Appointment</a>
+								<a asp-action="BookAppointment" asp-controller="Home" class="btn">Book Appointment</a>
 							</div>
 						</div>
 					</div>
