@@ -1,0 +1,42 @@
+﻿@model Doctor
+@{
+    SelectList Options = new SelectList(ViewBag.DeptList, "Id", "Name");
+} 
+
+
+<h2>Add New Doctor</h2>
+
+
+<form asp-action="Create" asp-controller="Doctor" method="post">
+    <label>Name</label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+
+    <label>Medical Field</label>
+    <input asp-for="MedicalField" class="form-control" />
+    <span asp-validation-for="MedicalField" class="text-danger"></span>
+
+    <label>Phone Number</label>
+    <input asp-for="PhoneNumber" class="form-control" />
+    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+    <label>Email</label>
+    <input asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+
+    <label>Choose Department</label>
+
+    <select class="form form-control" asp-for="DepartmentId" asp-items="Options">
+
+        <option value="">Choose Department</option>
+    </select>
+
+
+    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+
+    <label>Choose Image</label>
+    <input asp-for="ProfileImageUrl" class="form-control" type="file"/>
+    <span asp-validation-for="ProfileImageUrl" class="text-danger"></span>
+
+    <button type="submit" class="btn btn-success mt-3">Add</button>
+</form>

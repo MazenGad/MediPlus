@@ -1,0 +1,298 @@
+﻿@model BlogPost;
+@{
+    ViewData["Title"] = "MediPlus-Blogs";
+    Layout = "_MediPlusLayout";
+}
+
+
+<!-- Breadcrumbs -->
+
+<partial name="_Breadcrumbs" data=@ViewData["Page"] />
+
+
+<!-- End Breadcrumbs -->
+
+
+<!-- Single News -->
+<section class="news-single section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-12">
+				<div class="row">
+
+					<div class="col-12">
+						<div class="single-main">
+
+							<!-- News Head -->
+							<div class="news-head">
+								<img src=@Model.TitleImage alt="#">
+							</div>
+						
+							<!-- News Title -->
+							<h1 class="news-title"><a href="news-single.html">@Model.Title</a></h1>
+
+							<!-- Meta -->
+							<div class="meta">
+								<div class="meta-left">
+									
+									<span class="author"><a href="#"><img src="/img/author1.jpg" alt="#">@Model.Author</a></span>
+									
+									<span class="date"><i class="fa fa-clock-o"></i>@Model.PublishedDate.ToString("dd MMM yyyy")</span>
+								</div>
+
+
+
+								<div class="meta-right">
+									
+									<span class="comments"><a href="#"><i class="fa fa-comments"></i>@Model.Comments.Count</a></span>
+									
+									<span class="views"><i class="fa fa-eye"></i>@Model.Views</span>
+							
+								</div>
+
+
+							</div>
+							<!-- News Text -->
+							<div class="news-text">
+								<p>@Model.Content</p>
+							
+							</div>
+
+							<div class="blog-bottom">
+								<!-- Social Share -->
+								<ul class="social-share">
+									<li class="facebook"><a href="#"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
+									<li class="twitter"><a href="#"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
+									<li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+									<li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+									<li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+								</ul>
+
+								<!-- Next Prev -->
+								<ul class="prev-next">
+									<li class="prev"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+									<li class="next"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+								</ul>
+								<!--/ End Next Prev -->
+							</div>
+						</div>
+					</div>
+
+
+					<div class="col-12">
+						<div class="blog-comments">
+							<h2>All Comments</h2>
+							<div class="comments-body" id="comments-container">
+							</div>
+							<button id="load-more-comments" class="btn btn-primary">Load More Comments</button>
+						</div>
+					</div>
+
+				
+
+
+
+					<div class="col-12">
+						<div class="comments-form">
+							<h2>Leave a Comment</h2>
+							<form id="commentForm" class="form">
+								<input type="hidden" name="postId" value="@Model.Id" />
+
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<i class="fa fa-user"></i>
+											<input type="text" name="Name" placeholder="Name" required="required" />
+										</div>
+									</div>
+
+									<div class="col-lg-6 col-md-6 col-12">
+										<div class="form-group">
+											<i class="fa fa-envelope"></i>
+											<input type="email" name="Email" placeholder="Your Email" required="required" />
+										</div>
+									</div>
+
+									<div class="col-12">
+										<div class="form-group message">
+											<i class="fa fa-pencil"></i>
+											<textarea name="Content" rows="7" placeholder="Type Your Message Here"></textarea>
+										</div>
+									</div>
+
+									<div class="col-12">
+										<div class="form-group button">
+											<button type="submit" class="btn primary">
+												<i class="fa fa-send"></i> Submit Comment
+											</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-lg-4 col-12">
+				<div class="main-sidebar">
+					<!-- Single Widget -->
+					<div class="single-widget search">
+						<div class="form">
+							<input type="email" placeholder="Search Here...">
+							<a class="button" href="#"><i class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<!--/ End Single Widget -->
+					<!-- Single Widget -->
+					<div class="single-widget category">
+						<h3 class="title">Blog Categories</h3>
+						<ul class="categor-list">
+							@{
+								foreach (var c in ViewBag.Categories)
+								{
+									<li><a href="#">@c.Name</a></li>
+
+								}
+
+							}
+						</ul>
+					</div>
+					<!--/ End Single Widget -->
+					<!-- Single Widget -->
+					<div class="single-widget recent-post">
+						<h3 class="title">Recent post</h3>
+						@{
+							foreach (var c in ViewBag.Recent)
+							{
+								<div class="single-post">
+									<div class="image">
+										<img src=@c.TitleImage alt="#">
+									</div>
+									<div class="content">
+										<h5><a href="#">@c.Title</a></h5>
+										<ul class="comment">
+											<li><i class="fa fa-calendar" aria-hidden="true"></i>@c.PublishedDate.ToString("dd MMM yyyy")</li>
+											<li><i class="fa fa-commenting-o" aria-hidden="true"></i>@c.Comments.Count</li>
+										</ul>
+									</div>
+								</div>
+							}
+
+						}
+	
+
+					</div>
+
+					<div class="single-widget side-tags">
+						<h3 class="title">Tags</h3>
+						<ul class="tag">
+							<li><a href="#">business</a></li>
+							<li><a href="#">wordpress</a></li>
+							<li><a href="#">html</a></li>
+							<li><a href="#">multipurpose</a></li>
+							<li><a href="#">education</a></li>
+							<li><a href="#">template</a></li>
+							<li><a href="#">Ecommerce</a></li>
+						</ul>
+					</div>
+					<!--/ End Single Widget -->
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</section>
+<!--/ End Single News -->
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+			var postId = @Model.Id; 
+			var page = 1; 
+
+			function loadComments() {
+				$.ajax({
+					url: '/Blog/GetComments', 
+					type: 'GET',
+					data: { postId: postId, page: page }, 
+					success: function (response) {
+						if (response && response.length > 0) {
+							console.log(response);
+							response.forEach(function (comment) {
+								var postedDate = new Date(comment.postedDate);
+								var dateFormatted = postedDate.toLocaleDateString('en-US');
+								var timeFormatted = postedDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+								var commentHtml = '<div class="single-comments">' +
+									'<div class="main">' +
+									'<div class="head">' +
+									'<img src="/img/author1.jpg" alt="#" />' +
+									'</div>' +
+									'<div class="body">' +
+									'<h4>' + comment.name + '</h4>' +
+									'<div class="comment-meta">' +
+									'<span class="meta"><i class="fa fa-calendar"></i>' + dateFormatted + '</span>' +
+									'<span class="meta"><i class="fa fa-clock-o"></i>' + timeFormatted + '</span>' +
+									'</div>' +
+									'<p>' + comment.content + '</p>' +
+									'</div>' +
+									'</div>' +
+									'</div>';
+								$('#comments-container').append(commentHtml);
+							});
+							page++; 
+						}
+						if (response.length === 0) {
+							$('#load-more-comments').hide();
+						}
+					}
+				});
+			}
+
+			loadComments();
+
+			$('#load-more-comments').on('click', function () {
+				loadComments();
+			});
+
+			setInterval(function () {
+				loadComments();
+			}, 5000); 
+		});
+
+	</script>
+
+
+	<script>
+		$(document).ready(function () {
+			$('#commentForm').submit(function (e) {
+				e.preventDefault();
+
+				var formData = $(this).serialize(); 
+
+				$.ajax({
+					url: '@Url.Action("AddComment", "Blog")', 
+					type: 'POST',
+					data: formData, 
+					success: function (response) {
+						if (response) {
+
+							$('#commentForm')[0].reset();
+
+							$('#commentForm').append('<div class="success-message">Sent!</div>');
+							$('.success-message').fadeIn().delay(2000).fadeOut();
+						}
+					},
+					error: function () {
+						alert('Error!');
+					}
+				});
+			});
+		});
+	</script>
+
+
+
+}
+

@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "MediPlus-Contact";
+    Layout = "_MediPlusLayout";
+}
+
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs overlay">
+	<div class="container">
+		<div class="bread-inner">
+			<div class="row">
+				<div class="col-12">
+					<h2>Contact Us</h2>
+					<ul class="bread-list">
+						<li><a asp-action="Index" asp-controller="Home">Home Page </a></li>
+						<li><i class="icofont-simple-right"></i></li>
+						<li class="active">Contact Us</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Breadcrumbs -->
+<!-- Start Contact Us -->
+<section class="contact-us section">
+	<div class="container">
+		<div class="inner">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="contact-us-left">
+						<!--Start Google-map -->
+						<div id="myMap"></div>
+						<!--/End Google-map -->
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="contact-us-form">
+						<h2>Contact With Us</h2>
+						<p>If you have any questions please fell free to contact with us.</p>
+						<!-- Form -->
+						<form class="form" id="contactForm">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<input type="text" name="Name" placeholder="Name" required="required">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<input type="email" name="Email" placeholder="Email" required="required">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<input type="text" name="PhoneNumber" placeholder="Phone" required="required">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<input type="text" name="Subject" placeholder="Subject" required="required">
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group">
+										<textarea name="Message" placeholder="Your Message" required="required"></textarea>
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group login-btn">
+										<button class="btn" type="submit">Send</button>
+									</div>
+								</div>
+								<div class="checkbox">
+									<label class="checkbox-inline" for="2"><input id="2" type="checkbox">Do you want to subscribe our Newsletter ?</label>
+								</div>
+							</div>
+						</form>
+						<!--/ End Form -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="contact-info">
+			<div class="row">
+				<!-- single-info -->
+				<div class="col-lg-4 col-12 ">
+					<div class="single-info">
+						<i class="icofont icofont-ui-call"></i>
+						<div class="content">
+							<h3>+(000) 1234 56789</h3>
+							<p>info@company.com</p>
+						</div>
+					</div>
+				</div>
+				<!--/End single-info -->
+				<!-- single-info -->
+				<div class="col-lg-4 col-12 ">
+					<div class="single-info">
+						<i class="icofont-google-map"></i>
+						<div class="content">
+							<h3>2 Fir e Brigade Road</h3>
+							<p>Chittagonj, Lakshmipur</p>
+						</div>
+					</div>
+				</div>
+				<!--/End single-info -->
+				<!-- single-info -->
+				<div class="col-lg-4 col-12 ">
+					<div class="single-info">
+						<i class="icofont icofont-wall-clock"></i>
+						<div class="content">
+							<h3>Mon - Sat: 8am - 5pm</h3>
+							<p>Sunday Closed</p>
+						</div>
+					</div>
+				</div>
+				<!--/End single-info -->
+			</div>
+		</div>
+	</div>
+</section>
+<!--/ End Contact Us -->
+@section Scripts {
+
+	<script>
+		$(document).ready(function () {
+			$('#contactForm').submit(function (e) {
+				e.preventDefault();
+
+				var formData = $(this).serialize();
+
+				$.ajax({
+					url: '@Url.Action("AddContactMessage", "Contact")',
+					type: 'POST',
+					data: formData,
+					success: function (response, status, xhr) {
+						if (xhr.status === 200) {
+
+							$('#contactForm')[0].reset();
+
+							$('#contactForm').append('<div class="success-message text-primary fs-2">Sent!</div>');
+							$('.success-message').fadeIn().delay(2000).fadeOut();
+						}
+					},
+					error: function () {
+						alert('Error!');
+					}
+				});
+			});
+		});
+	</script>
+
+
+
+}
+

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Service>
+
+
+@Html.Partial("_Breadcrumbs", ViewData["Page"]);
+
+<!-- Start service -->
+<section class="services section">
+	<div class="container">
+
+		<div class="row">
+
+			@foreach (var service in Model)
+			{
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="single-service">
+						<i class="icofont @ServiceHelper.GetServiceIcon(service.Name)"></i> -->
+						<h4><a href="#">@service.Name</a></h4>
+						<p>@service.Description</p>
+					</div>
+				</div>
+			}
+
+
+
+		</div>
+	</div>
+</section>
+<!--/ End service -->

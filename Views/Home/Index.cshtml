@@ -1,0 +1,20 @@
+﻿@model HomeViewModel;
+@{
+    ViewData["Title"] = "MediPlus-Home";
+    Layout = "_MediPlusLayout";
+
+}
+
+<partial name="_Slider"/>
+<partial name="_Schedule" model="Model.OpeningHours"/>
+<partial name="_Features"/>
+<partial name="_FunFacts"/>
+<partial name="_WhyChoose"/>
+<partial name="_CallToAction"/>
+<partial name="_Portfolio"/>
+<partial name="_Services" model="Model.Services" />
+<partial name="_Pricing" model="Model.Services" />
+<partial name="_Blog" />
+<partial name="_Clients" />
+<partial name="_Appointment" model="Model.Appointment" />
+<partial name="_Newsletter"  />

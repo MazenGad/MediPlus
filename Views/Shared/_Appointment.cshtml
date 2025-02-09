@@ -1,0 +1,110 @@
+﻿@model AppointmentViewModel
+
+<!-- Start Appointment -->
+<section class="appointment">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="section-title">
+					<h2>We Are Always Ready to Help You. Book An Appointment</h2>
+					<img src="img/section-img.png" alt="#">
+					<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-md-12 col-12">
+				<form class="form" asp-action="BookAppointment" method="post">
+					<div class="row">
+
+						<div class="col-lg-6 col-md-6 col-12">
+
+							<div class="form-group">
+								<input asp-for="Appointment.PatientName" class="form-control" placeholder="PatientName" />
+								<span asp-validation-for="Appointment.PatientName" class="text-danger"></span>
+							</div>
+
+						</div>
+
+
+						<div class="col-lg-6 col-md-6 col-12">
+							<div class="form-group">
+									<input asp-for="Appointment.Email" class=" form-control" placeholder="Email" />
+									<span asp-validation-for="Appointment.Email" class="text-danger"></span>
+								</div>
+						</div>
+
+						<div class="col-lg-6 col-md-6 col-12">
+							<div class="form-group">
+									<input asp-for="Appointment.PhoneNumber" class="form-control" placeholder="PhoneNumber" />
+									<span asp-validation-for="Appointment.PhoneNumber" class="text-danger"></span>
+								</div>
+						</div>
+
+							<div class="col-lg-6 col-md-6 col-12">
+								<div class="form-group">
+									<select asp-for="Appointment.DepartmentId" class="form-control" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))">
+										<option value="">Choose Department</option>
+									</select>
+									<span asp-validation-for="Appointment.DepartmentId" class="text-danger"></span>
+								</div>
+							</div>
+
+						<!-- Doctor Dropdown -->
+						<div class="col-lg-6 col-md-6 col-12">
+							<div class="form-group">
+								<select asp-for="Appointment.DoctorId"  class="form-control" asp-items="@(new SelectList(Model.Doctors, "Id", "Name"))">
+									<option value="">Choose Doctor</option>
+								</select>
+								<span asp-validation-for="Appointment.DoctorId" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="col-lg-6 col-md-6 col-12">
+							<div class="form-group">
+								<input asp-for="Appointment.AppointmentDate" type="date"  class="form-control" placeholder="AppointmentDate" />
+								<span asp-validation-for="Appointment.AppointmentDate" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="col-lg-12 col-md-12 col-12">
+							<div class="form-group">
+								<input asp-for="Appointment.Message" class="form-control" placeholder="Message" />
+								<span asp-validation-for="Appointment.Message" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="col-lg-12 col-md-12 col-12">
+							<div class="form-group">
+								<input asp-for="Appointment.Status" class="form-control" placeholder="Status" />
+								<span asp-validation-for="Appointment.Status" class="text-danger"></span>
+							</div>
+						</div>
+
+						</div>
+					<div class="row">
+						<div class="col-lg-5 col-md-4 col-12">
+							<div class="form-group">
+								<div class="button">
+									<button type="submit" class="btn btn-success mt-3">Book An Appointment</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-7 col-md-8 col-12">
+							<p>( We will be confirm by an Text Message )</p>
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+			<div class="col-lg-6 col-md-12 ">
+				<div class="appointment-image">
+					<img src="img/contact-img.png" alt="#">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Appointment -->
