@@ -83,12 +83,12 @@ namespace MediPlus.Controllers
 				var appointment = model.Appointment;
 
 				await _appointmentRepository.AddAppointment(appointment);
-				return RedirectToAction("Index");
+				return Ok();
 			}
 
 			model.Departments = await _departmentRepository.GetAllDepartmentsAsync();
 			model.Doctors = await _doctorRepository.GetAllDoctorsAsync();
-			return View("Index", model);
+			return BadRequest(ModelState);
 
 		}
 

@@ -18,3 +18,34 @@
 <partial name="_Clients" />
 <partial name="_Appointment" model="Model.Appointment" />
 <partial name="_Newsletter"  />
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+			$('#appointmentForm').submit(function (e) {
+				e.preventDefault();
+				var formData = $(this).serialize();
+				$.ajax({
+					url: '@Url.Action("BookAppointment", "Home")',
+					type: 'POST',
+					data: formData,
+					success: function (response, status, xhr) {
+						if (xhr.status === 200) {
+							$('#appointmentForm')[0].reset();
+
+							$('#appointmentForm').append('<div class="success-message text-primary fs-2">Sent!</div>');
+							$('.success-message').fadeIn().delay(2000).fadeOut();
+						}
+					},
+					error: function () {
+						alert('Error!');
+					}
+				});
+			});
+		});
+	</script>
+
+
+
+}
+
