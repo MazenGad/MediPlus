@@ -15,6 +15,7 @@ namespace MediPlus.Controllers
 		private IDepartmentRepository _departmentRepository;
 		private IAppointmentRepository _appointmentRepository;
 		private IBlogPostRepository _blogPostRepository;
+		private INewsSubscriptionsRepository _newsSubscriptionsRepository;
 
 
 
@@ -25,7 +26,8 @@ namespace MediPlus.Controllers
 			 IDoctorRepository doctorRepository,
 			 IDepartmentRepository departmentRepository,
 			 IAppointmentRepository appointmentRepository,
-			 IBlogPostRepository blogPostRepository
+			 IBlogPostRepository blogPostRepository,
+			 INewsSubscriptionsRepository newsSubscriptionsRepository
 			)
 		{
 			_logger = logger;
@@ -35,6 +37,7 @@ namespace MediPlus.Controllers
 			_departmentRepository = departmentRepository;
 			_appointmentRepository = appointmentRepository;
 			_blogPostRepository = blogPostRepository;
+			_newsSubscriptionsRepository = newsSubscriptionsRepository;
 
 		}
 
@@ -96,7 +99,7 @@ namespace MediPlus.Controllers
 			{
 				var appointment = model.Appointment;
 
-				await _appointmentRepository.AddAppointment(appointment);
+				await _appointmentRepository.AddAppointmentAsync(appointment);
 				return Ok();
 			}
 
@@ -114,7 +117,19 @@ namespace MediPlus.Controllers
 			return Json(doctors);
 		}
 
+		[HttpPost]
 		public async Task<IActionResult> AddSubscribe(NewsletterSubscription subscription)
+		{
 
+			if (ModelState.IsValid)
+			{
+
+				await _newsSubscriptionsRepository.AddSubscribeAsync(subscription);
+				return Ok();
+			}
+
+			return BadRequest(ModelState);
+
+		}
 	}
 }

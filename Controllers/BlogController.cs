@@ -56,7 +56,7 @@ namespace MediPlus.Controllers
 		{
 			if(ModelState.IsValid)
 			{
-				await _blogPostRepository.AddBlogPost(blogPost);
+				await _blogPostRepository.AddBlogPostAsync(blogPost);
 				return RedirectToAction("BlogPost");
 			}
             ViewBag.Categories = await _blogCategoryRepository.GetBlogCategoriesAsync();

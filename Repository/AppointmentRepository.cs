@@ -14,7 +14,7 @@ namespace MediPlus.Repository
 
 
 
-		async Task<IEnumerable<Appointment>> IAppointmentRepository.GetAllAppointments()
+		async Task<IEnumerable<Appointment>> IAppointmentRepository.GetAllAppointmentsAsync()
 		{
 			return await _context.Appointments
 				.Include(a => a.Department)
@@ -22,10 +22,25 @@ namespace MediPlus.Repository
 				.ToListAsync();
 		}
 
-		async Task IAppointmentRepository.AddAppointment(Appointment appointment)
+		async Task IAppointmentRepository.AddAppointmentAsync(Appointment appointment)
 		{
 			await _context.Appointments.AddAsync(appointment);
 			await _context.SaveChangesAsync();
 		}
-	}
+
+        public Task<Appointment> GetAppointmentByUserAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAppointmentAsync(Appointment appointment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAppointmentAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

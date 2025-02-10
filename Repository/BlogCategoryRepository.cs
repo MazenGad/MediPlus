@@ -18,11 +18,26 @@ namespace MediPlus.Repository
 
         }
 
+        public Task DeleteCategoryAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<BlogCategory>> GetBlogCategoriesAsync()
         {
             var BlogCategories = await _context.BlogCategories.Include(bp=>bp.BlogPosts).ToListAsync();
 
             return BlogCategories;
+        }
+
+        public Task<BlogCategory> GetCategoryByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateCategoryAsync(BlogCategory category)
+        {
+            throw new NotImplementedException();
         }
     }
 }

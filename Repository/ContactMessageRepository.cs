@@ -17,10 +17,25 @@ namespace MediPlus.Repository
 			_context.SaveChangesAsync();
 		}
 
-		public async Task<IEnumerable<ContactMessage>> GetContactMessagesAsync()
+        public Task DeleteContactMessageAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<ContactMessage>> GetContactMessagesAsync()
 		{
 			var contactMessages =await  _context.ContactMessages.ToListAsync();
 			return contactMessages;
 		}
-	}
+
+        public Task<ContactMessage> GetContactMessagesByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateContactMessageAsync(ContactMessage message)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -21,7 +21,12 @@ namespace MediPlus.Repository
 
         }
 
-		public async Task<IEnumerable<Comment>> GetPostCommentsAsync(int postId, int page, int pageSize)
+        public Task DeleteCommentAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Comment>> GetPostCommentsAsync(int postId, int page, int pageSize)
 		{
 			var comments = await _context.Comments
 				.Where(c => c.BlogPostId == postId)
@@ -33,5 +38,9 @@ namespace MediPlus.Repository
 			return comments;
 		}
 
-	}
+        public Task UpdateCommentAsync(Comment comment, int PostId)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -21,6 +21,29 @@
 	});
 });
 
+$(document).ready(function () {
+	$('#SubscribeForm').submit(function (e) {
+		e.preventDefault();
+		var formData = $(this).serialize();
+		$.ajax({
+			url: '/Home/AddSubscribe',
+			type: 'POST',
+			data: formData,
+			success: function (response, status, xhr) {
+				if (xhr.status === 200) {
+					$('#SubscribeForm')[0].reset();
+
+					$('#SubscribeForm').append('<div class="success-message text-primary fs-2">Subscribed!</div>');
+					$('.success-message').fadeIn().delay(2000).fadeOut();
+				}
+			},
+			error: function () {
+				alert('Error!');
+			}
+		});
+	});
+});
+
 function GetDoctors() {
 	var deptId = document.getElementById("deptId").value;
 	var DocElement = document.getElementById("docId");

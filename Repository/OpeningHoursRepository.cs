@@ -12,9 +12,24 @@ namespace MediPlus.Repository
 			_context = context;
 		}
 
-		public async Task<IEnumerable<OpeningHours>> GetAllOpeningHoursAsync()
+        public Task AddOpeningHoursAsync(OpeningHours openingHours)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteOpeningHoursAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<OpeningHours>> GetAllOpeningHoursAsync()
 		{
 			return await _context.OpeningHours.ToListAsync();
 		}
-	}
+
+        public Task UpdateOpeningHoursAsync(OpeningHours openingHours)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

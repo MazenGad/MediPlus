@@ -11,13 +11,18 @@ namespace MediPlus.Repository
 		{
 			_context = context;
 		}
-		public async Task AddBlogPost(BlogPost blogPost)
+		public async Task AddBlogPostAsync(BlogPost blogPost)
 		{
 			await _context.BlogPosts.AddAsync(blogPost);
 			_context.SaveChangesAsync();
 		}
 
-		public async Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync()
+        public Task DeleteBlogPostAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync()
 		{
 			var BlogPosts = await _context.BlogPosts.Include(c=>c.Category).ToListAsync();
 			return BlogPosts;
@@ -40,5 +45,10 @@ namespace MediPlus.Repository
 				.ToListAsync();
 			return BlogPosts;
 		}
-	}
+
+        public Task UpdateBlogPostAsync(BlogPost blogPost)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

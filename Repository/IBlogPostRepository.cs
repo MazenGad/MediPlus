@@ -8,7 +8,11 @@ namespace MediPlus.Repository
 		Task<IEnumerable<BlogPost>> GetRecentBlogPostsAsync();
 
 		Task<BlogPost> GetPostByIdAsync(int id);
-		Task AddBlogPost(BlogPost blogPost);
+		Task AddBlogPostAsync(BlogPost blogPost);
 
-	}
+        Task UpdateBlogPostAsync(BlogPost blogPost);
+
+        Task DeleteBlogPostAsync(int id);
+
+    }
 }

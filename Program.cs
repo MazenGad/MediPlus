@@ -22,6 +22,7 @@ namespace MediPlus
             builder.Services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();
             builder.Services.AddScoped<ICommentRepository, CommentRepository>();
             builder.Services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
+            builder.Services.AddScoped<INewsSubscriptionsRepository, NewsSubscriptionsRepository>();
 
 
             builder.Services.AddDbContext<MediPlusContext>(options =>

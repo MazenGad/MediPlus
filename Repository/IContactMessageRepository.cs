@@ -3,9 +3,16 @@
 namespace MediPlus.Repository
 {
 	public interface IContactMessageRepository
-	{
-		Task AddContactMessageAsync(ContactMessage contactMessage);
+    {
+        Task<IEnumerable<ContactMessage>> GetContactMessagesAsync();
 
-		Task<IEnumerable<ContactMessage>> GetContactMessagesAsync();
-	}
+        Task<ContactMessage> GetContactMessagesByIdAsync(int id);
+
+        Task AddContactMessageAsync(ContactMessage contactMessage);
+
+        Task UpdateContactMessageAsync(ContactMessage message);
+
+        Task DeleteContactMessageAsync(int id);
+
+    }
 }
