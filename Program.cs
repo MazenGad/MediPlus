@@ -1,53 +1,57 @@
 using MediPlus.Data;
+using MediPlus.Helpers;
 using MediPlus.Repository;
+using MediPlus.Repository.Implementation;
 using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace MediPlus
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
-            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            builder.Services.AddScoped<IOpeningHoursRepository, OpeningHoursRepository>();
-            builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
-            builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-            builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
-            builder.Services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();
-            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-            builder.Services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
-            builder.Services.AddScoped<INewsSubscriptionsRepository, NewsSubscriptionsRepository>();
+			// Add services to the container.
+			builder.Services.AddControllersWithViews();
+			builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+			builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+			builder.Services.AddScoped<IOpeningHoursRepository, OpeningHoursRepository>();
+			builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+			builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+			builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+			builder.Services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();
+			builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+			builder.Services.AddScoped<IContactMessageRepository, ContactMessageRepository>();
+			builder.Services.AddScoped<INewsSubscriptionsRepository, NewsSubscriptionsRepository>();
+			builder.Services.AddSingleton<IServiceHelper, ServiceHelper>();
 
 
-            builder.Services.AddDbContext<MediPlusContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            var app = builder.Build();
+			builder.Services.AddDbContext<MediPlusContext>(options =>
+				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-            app.UseStatusCodePagesWithReExecute("/Home/NotFound");
+			var app = builder.Build();
 
-            app.UseStaticFiles();
+			// Configure the HTTP request pipeline.
+			if (!app.Environment.IsDevelopment())
+			{
+				app.UseExceptionHandler("/Home/Error");
+			}
+			app.UseStatusCodePagesWithReExecute("/Home/NotFound");
 
-            app.UseRouting();
+			app.UseStaticFiles();
 
-            app.UseAuthorization();
+			app.UseRouting();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+			app.UseAuthorization();
 
-            app.Run();
-        }
-    }
+			app.MapControllerRoute(
+				name: "default",
+				pattern: "{controller=Home}/{action=Index}/{id?}");
+
+			app.Run();
+		}
+	}
 }

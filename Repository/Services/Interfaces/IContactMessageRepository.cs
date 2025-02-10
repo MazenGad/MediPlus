@@ -2,7 +2,7 @@
 
 namespace MediPlus.Repository
 {
-	public interface IContactMessageRepository
+    public interface IContactMessageRepository
     {
         Task<IEnumerable<ContactMessage>> GetContactMessagesAsync();
 

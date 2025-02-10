@@ -6,130 +6,136 @@ using System.Diagnostics;
 
 namespace MediPlus.Controllers
 {
-	public class HomeController : Controller
-	{
-		private readonly ILogger<HomeController> _logger;
-		private IOpeningHoursRepository _openingHoursRepository;
-		private IServiceRepository _serviceRepository;
-		private IDoctorRepository _doctorRepository;
-		private IDepartmentRepository _departmentRepository;
-		private IAppointmentRepository _appointmentRepository;
-		private IBlogPostRepository _blogPostRepository;
-		private INewsSubscriptionsRepository _newsSubscriptionsRepository;
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+        private IOpeningHoursRepository _openingHoursRepository;
+        private IServiceRepository _serviceRepository;
+        private IDoctorRepository _doctorRepository;
+        private IDepartmentRepository _departmentRepository;
+        private IAppointmentRepository _appointmentRepository;
+        private IBlogPostRepository _blogPostRepository;
+        private INewsSubscriptionsRepository _newsSubscriptionsRepository;
 
 
 
-		public HomeController(
-			ILogger<HomeController> logger,
-			 IOpeningHoursRepository openingHoursRepository,
-			 IServiceRepository serviceRepository,
-			 IDoctorRepository doctorRepository,
-			 IDepartmentRepository departmentRepository,
-			 IAppointmentRepository appointmentRepository,
-			 IBlogPostRepository blogPostRepository,
-			 INewsSubscriptionsRepository newsSubscriptionsRepository
-			)
-		{
-			_logger = logger;
-			_openingHoursRepository = openingHoursRepository;
-			_serviceRepository = serviceRepository;
-			_doctorRepository = doctorRepository;
-			_departmentRepository = departmentRepository;
-			_appointmentRepository = appointmentRepository;
-			_blogPostRepository = blogPostRepository;
-			_newsSubscriptionsRepository = newsSubscriptionsRepository;
+        public HomeController(
+            ILogger<HomeController> logger,
+             IOpeningHoursRepository openingHoursRepository,
+             IServiceRepository serviceRepository,
+             IDoctorRepository doctorRepository,
+             IDepartmentRepository departmentRepository,
+             IAppointmentRepository appointmentRepository,
+             IBlogPostRepository blogPostRepository,
+             INewsSubscriptionsRepository newsSubscriptionsRepository
+            )
+        {
+            _logger = logger;
+            _openingHoursRepository = openingHoursRepository;
+            _serviceRepository = serviceRepository;
+            _doctorRepository = doctorRepository;
+            _departmentRepository = departmentRepository;
+            _appointmentRepository = appointmentRepository;
+            _blogPostRepository = blogPostRepository;
+            _newsSubscriptionsRepository = newsSubscriptionsRepository;
 
-		}
+        }
 
-		[HttpGet]
-		public async Task<IActionResult> Index()
-		{
-			var appointmentViewModel = new AppointmentViewModel
-			{
-				Appointment = new Appointment { AppointmentDate = DateTime.Now.Date },
-				Departments = await _departmentRepository.GetAllDepartmentsAsync(),
-			};
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var departmentsTask = await _departmentRepository.GetAllDepartmentsAsync();
+            var openingHoursTask = await _openingHoursRepository.GetAllOpeningHoursAsync();
+            var servicesTask = await _serviceRepository.GetAllServicesAsync();
+            var postsTask = await _blogPostRepository.GetRecentBlogPostsAsync();
 
-			var viewModel = new HomeViewModel
-			{
-				OpeningHours = await _openingHoursRepository.GetAllOpeningHoursAsync(),
-				Services = await _serviceRepository.GetAllServicesAsync(),
-				Departments = await _departmentRepository.GetAllDepartmentsAsync(),
-				Appointment = appointmentViewModel
-			};
 
-			ViewBag.Posts = await _blogPostRepository.GetRecentBlogPostsAsync();
+            var appointmentViewModel = new AppointmentViewModel
+            {
+                Appointment = new Appointment { AppointmentDate = DateTime.Now.Date },
+                Departments = departmentsTask
+            };
 
-			return View("Index", viewModel);
-		}
+            var viewModel = new HomeViewModel
+            {
+                OpeningHours = openingHoursTask,
+                Services = servicesTask,
+                Departments = departmentsTask,
+                Appointment = appointmentViewModel
+            };
 
-		public IActionResult Privacy()
-		{
-			return View();
-		}
+            ViewBag.Posts = postsTask;
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
+            return View("Index", viewModel);
+        }
 
-		public IActionResult NotFound()
-		{
-			Response.StatusCode = 404;
-			return View();
-		}
-		[HttpGet]
-		public async Task<IActionResult> BookAppointment()
-		{
-			var appointmentViewModel = new AppointmentViewModel
-			{
-				Appointment = new Appointment { AppointmentDate = DateTime.Now.Date },
-				Departments = await _departmentRepository.GetAllDepartmentsAsync(),
-			};
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
-			return View("AppointmentView", appointmentViewModel);
-		}
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
 
-		[HttpPost]
-		public async Task<IActionResult> BookAppointment(AppointmentViewModel model)
-		{
+        public IActionResult NotFound()
+        {
+            Response.StatusCode = 404;
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> BookAppointment()
+        {
+            var appointmentViewModel = new AppointmentViewModel
+            {
+                Appointment = new Appointment { AppointmentDate = DateTime.Now.Date },
+                Departments = await _departmentRepository.GetAllDepartmentsAsync(),
+            };
 
-			if (ModelState.IsValid)
-			{
-				var appointment = model.Appointment;
+            return View("AppointmentView", appointmentViewModel);
+        }
 
-				await _appointmentRepository.AddAppointmentAsync(appointment);
-				return Ok();
-			}
+        [HttpPost]
+        public async Task<IActionResult> BookAppointment(AppointmentViewModel model)
+        {
 
-			model.Departments = await _departmentRepository.GetAllDepartmentsAsync();
-			model.Doctors = await _doctorRepository.GetAllDoctorsAsync();
-			return BadRequest(ModelState);
+            if (ModelState.IsValid)
+            {
+                var appointment = model.Appointment;
 
-		}
-		[HttpGet]
+                await _appointmentRepository.AddAppointmentAsync(appointment);
+                return Ok();
+            }
 
-		public async Task<IActionResult> GetDoctorsByDepartmetns(int deptID)
-		{
-			var doctors = await _doctorRepository.GetDoctorsByDeptAsync(deptID);
+            model.Departments = await _departmentRepository.GetAllDepartmentsAsync();
+            model.Doctors = await _doctorRepository.GetAllDoctorsAsync();
+            return BadRequest(ModelState);
 
-			return Json(doctors);
-		}
+        }
+        [HttpGet]
 
-		[HttpPost]
-		public async Task<IActionResult> AddSubscribe(NewsletterSubscription subscription)
-		{
+        public async Task<IActionResult> GetDoctorsByDepartmetns(int deptID)
+        {
+            var doctors = await _doctorRepository.GetDoctorsByDeptAsync(deptID);
 
-			if (ModelState.IsValid)
-			{
+            return Json(doctors);
+        }
 
-				await _newsSubscriptionsRepository.AddSubscribeAsync(subscription);
-				return Ok();
-			}
+        [HttpPost]
+        public async Task<IActionResult> AddSubscribe(NewsletterSubscription subscription)
+        {
 
-			return BadRequest(ModelState);
+            if (ModelState.IsValid)
+            {
 
-		}
-	}
+                await _newsSubscriptionsRepository.AddSubscribeAsync(subscription);
+                return Ok();
+            }
+
+            return BadRequest(ModelState);
+
+        }
+    }
 }

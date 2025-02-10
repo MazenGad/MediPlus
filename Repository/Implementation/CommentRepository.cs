@@ -1,7 +1,7 @@
 ﻿using MediPlus.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediPlus.Repository
+namespace MediPlus.Repository.Implementation
 {
     public class CommentRepository : ICommentRepository
     {
@@ -27,16 +27,16 @@ namespace MediPlus.Repository
         }
 
         public async Task<IEnumerable<Comment>> GetPostCommentsAsync(int postId, int page, int pageSize)
-		{
-			var comments = await _context.Comments
-				.Where(c => c.BlogPostId == postId)
-				.OrderBy(c => c.Id) 
-				.Skip((page - 1) * pageSize) 
-				.Take(pageSize) 
-				.ToListAsync();
+        {
+            var comments = await _context.Comments
+                .Where(c => c.BlogPostId == postId)
+                .OrderBy(c => c.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
 
-			return comments;
-		}
+            return comments;
+        }
 
         public Task UpdateCommentAsync(Comment comment, int PostId)
         {

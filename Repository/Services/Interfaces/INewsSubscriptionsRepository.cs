@@ -2,8 +2,8 @@
 
 namespace MediPlus.Repository
 {
-	public interface INewsSubscriptionsRepository
-	{
+    public interface INewsSubscriptionsRepository
+    {
         Task<IEnumerable<NewsletterSubscription>> GetAllSubscriptionsAsync();
 
         Task<NewsletterSubscription> GetSubscriptionByIdAsync(int id);

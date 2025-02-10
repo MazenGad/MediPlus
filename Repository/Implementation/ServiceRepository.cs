@@ -1,17 +1,18 @@
 ﻿using MediPlus.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediPlus.Repository
+namespace MediPlus.Repository.Implementation
 {
 
     public class ServiceRepository : IServiceRepository
-	{
-		private MediPlusContext _context;
+    {
 
-		public ServiceRepository(MediPlusContext context)
-		{
-			_context = context;
-		}
+        private MediPlusContext _context;
+
+        public ServiceRepository(MediPlusContext context)
+        {
+            _context = context;
+        }
 
         public Task AddServiceAsync(Service service)
         {
@@ -25,7 +26,7 @@ namespace MediPlus.Repository
 
         public async Task<IEnumerable<Service>> GetAllServicesAsync()
         {
-            return await _context.Services.Include(s => s.Department).Include(ds=>ds.DoctorServices).ToListAsync();
+            return await _context.Services.Include(s => s.Department).Include(ds => ds.DoctorServices).ToListAsync();
         }
 
         public Task<Service> GetServiceByIdAsync(int id)

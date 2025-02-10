@@ -5,10 +5,8 @@ namespace MediPlus.Repository
     public interface ICommentRepository
     {
         Task<IEnumerable<Comment>> GetPostCommentsAsync(int postId, int page, int pageSize);
-		Task<Comment> AddPostCommentAsync(Comment comment, int PostId);
-
+        Task<Comment> AddPostCommentAsync(Comment comment, int PostId);
         Task UpdateCommentAsync(Comment comment, int PostId);
-
         Task DeleteCommentAsync(int id);
 
 

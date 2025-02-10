@@ -1,7 +1,7 @@
 ﻿@model Doctor
 @{
     SelectList Options = new SelectList(ViewBag.DeptList, "Id", "Name");
-} 
+}
 
 
 <h2>Add New Doctor</h2>
@@ -35,7 +35,7 @@
     <span asp-validation-for="DepartmentId" class="text-danger"></span>
 
     <label>Choose Image</label>
-    <input asp-for="ProfileImageUrl" class="form-control" type="file"/>
+    <input asp-for="ProfileImageUrl" class="form-control" type="file" />
     <span asp-validation-for="ProfileImageUrl" class="text-danger"></span>
 
     <button type="submit" class="btn btn-success mt-3">Add</button>

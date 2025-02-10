@@ -6,11 +6,8 @@ namespace MediPlus.Repository
     {
         Task<IEnumerable<BlogCategory>> GetBlogCategoriesAsync();
         Task<BlogCategory> GetCategoryByIdAsync(int id);
-
         Task AddBlogCategoryAsync(BlogCategory blogCategory);
-
         Task UpdateCategoryAsync(BlogCategory category);
-
         Task DeleteCategoryAsync(int id);
 
     }
