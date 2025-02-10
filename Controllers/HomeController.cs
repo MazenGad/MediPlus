@@ -114,6 +114,7 @@ namespace MediPlus.Controllers
 			return Json(doctors);
 		}
 
+		public async Task<IActionResult> AddSubscribe(NewsletterSubscription subscription)
 
 	}
 }
