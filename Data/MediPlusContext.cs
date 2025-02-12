@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediPlus.Data.Users;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace MediPlus.Data
 {
-    public class MediPlusContext : DbContext
+    public class MediPlusContext : IdentityDbContext<ApplicationUser>
     {
         public MediPlusContext() : base() { }
 
@@ -30,7 +32,10 @@ namespace MediPlus.Data
 		
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-            modelBuilder.Entity<Doctor>().
+
+			base.OnModelCreating(modelBuilder);
+
+			modelBuilder.Entity<Doctor>().
                 HasOne(d=>d.Department)
                 .WithMany(d=>d.Doctors)
                 .HasForeignKey(d=>d.DepartmentId)

@@ -1,7 +1,9 @@
 using MediPlus.Data;
+using MediPlus.Data.Users;
 using MediPlus.Helpers;
 using MediPlus.Repository;
 using MediPlus.Repository.Implementation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -12,6 +14,13 @@ namespace MediPlus
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
+
+			builder.Services.AddDbContext<MediPlusContext>(options =>
+			options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+			builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+			.AddEntityFrameworkStores<MediPlusContext>()
+			.AddDefaultTokenProviders();
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
@@ -29,8 +38,7 @@ namespace MediPlus
 
 
 
-			builder.Services.AddDbContext<MediPlusContext>(options =>
-				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 			var app = builder.Build();
 
@@ -44,6 +52,8 @@ namespace MediPlus
 			app.UseStaticFiles();
 
 			app.UseRouting();
+
+			app.UseAuthentication();
 
 			app.UseAuthorization();
 

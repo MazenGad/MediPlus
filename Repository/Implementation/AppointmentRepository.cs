@@ -20,6 +20,7 @@ namespace MediPlus.Repository.Implementation
                 .Include(a => a.Department)
                 .Include(a => a.Doctor)
                 .ToListAsync();
+
         }
 
         async Task IAppointmentRepository.AddAppointmentAsync(Appointment appointment)

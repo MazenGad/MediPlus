@@ -1,5 +1,6 @@
 ﻿using MediPlus.Data;
 using MediPlus.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediPlus.Controllers
@@ -24,6 +25,7 @@ namespace MediPlus.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             ViewBag.DeptList = await _departmentRepository.GetAllDepartmentsAsync();
@@ -33,7 +35,7 @@ namespace MediPlus.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Doctor doctor)
+        public async Task<IActionResult> SaveCreate(Doctor doctor)
         {
             if (ModelState.IsValid == true)
             {

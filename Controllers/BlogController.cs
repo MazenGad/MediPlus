@@ -1,5 +1,6 @@
 ﻿using MediPlus.Data;
 using MediPlus.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediPlus.Controllers
@@ -10,7 +11,6 @@ namespace MediPlus.Controllers
         private IBlogPostRepository _blogPostRepository;
         private IBlogCategoryRepository _blogCategoryRepository;
         private ICommentRepository _commentRepository;
-
         public BlogController(
             IBlogPostRepository blogPostRepository,
             IBlogCategoryRepository blogCategoryRepository,

@@ -71,6 +71,17 @@
 							<li><a asp-action="Index" asp-controller="Doctor">Doctors</a></li>
 							<li><a asp-action="ContactUs" asp-controller="Contact">Contact</a></li>
 							<li><a href="#">FAQ</a></li>
+							@if (User.Identity.IsAuthenticated)
+							{
+								<li><a asp-action="SignOut" asp-controller="Account">SignOut</a></li>
+								<li><a asp-action="SignOut" asp-controller="Account">Welcome @User.Identity.Name</a></li>
+							}
+							else
+							{
+								<li><a asp-action="Register" asp-controller="Account">SignUp</a></li>
+								<li><a asp-action="SignIn" asp-controller="Account">SignIn</a></li>
+							}
+
 						</ul>
 						<!-- End Contact -->
 					</div>
